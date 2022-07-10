@@ -1,0 +1,21 @@
+/* 新闻案例的样式 */
+body{
+    font: 16px/28px 'Micrsoft YaHei' ;
+}
+h1{
+    text-align: center;
+    font-weight: 400;
+}
+.search{
+    color: #888888;
+    font-size: 12px;
+    text-align: center;
+}
+.content{
+    margin: 16px 0 16px 0;
+    text-indent: 2em;
+}
+.foot{
+    color: #888888;
+    font-size: 12px;
+}
