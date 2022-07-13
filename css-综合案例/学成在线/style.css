@@ -1,3 +1,7 @@
+body{
+    background-color: #f3f5f7;
+}
+
 *{
     margin: 0;
     padding: 0;
@@ -5,8 +9,20 @@
 
 /* 版心 */
 .w {
-width: 1200px;
-margin: auto;
+    width: 1200px;
+    margin: auto;
+}
+
+/* 清除浮动 */
+.clearfix:before,.clearfix:after{
+    content:"";
+    display:table;
+}
+.clearfix:after{
+    clear:both;
+}
+.clearfix{
+	*zoom:1;
 }
 
 /* 头部 */
@@ -182,4 +198,157 @@ margin: auto;
     margin-top: 10px;
     box-shadow: 0 2px 3px 3px rgba(0, 0, 0, 0.1);
     background-color: #fff;
+    line-height: 60px;
+
+}
+
+.nav h3{
+    float: left;
+    height: 60px;    
+    font-size: 16px;
+    color: #00a4ff;
+    margin-left: 30px;
+    margin-right: 30px;
+
+}
+
+.nav ul li{
+    float: left;
+    list-style: none;
+    
+}
+
+.nav ul li a{
+    color: black;
+    padding: 0 30px;
+    text-decoration: none;
+    border-left: 1px solid #eee;
+}
+
+.mod{
+    float: right;
+    margin-right: 30px;
+
+}
+
+.mod a{
+    font-size: 14px;
+    color: #00a4ff;
+    text-decoration: none;
+}
+
+/* 产品区域 */
+.goods{
+    margin-top: 30px;
+}
+
+.goods-up{
+    height: 45px;
+}
+
+.goods-up h3{
+    float: left;
+    font-size: 20px;
+    color: #494949;
+}
+
+.goods-up a{
+    float: right;
+    font-size: 12px;
+    color: #a5a5a5;
+    text-decoration: none;
+    margin-right: 30px;
+}
+
+.goods-down ul{
+    width: 1225px;
+}
+
+.goods-down ul li{
+    float: left;
+    width: 228px;
+    height: 270px;
+    background-color: white;
+    list-style: none;
+    margin-right: 15px;
+    margin-bottom: 15px;
+}
+
+.goods-down ul li img{
+    width: 100%;
+}
+
+.goods-down ul li h4{
+    margin: 20px;
+    font-size: 14px;
+    color: #050505;
+    font-weight: 400;
+}
+
+.goods-down ul li p{
+    font-size: 12px;
+    color: orange;
+    padding: 0 20px;
+}
+
+.goods-down ul li span{
+    font-size: 12px;
+    color: #999;
+}
+
+/* 尾部 */
+.footer{
+    height: 415px;
+    background-color: #fff;
+}
+
+.footer .w{
+    padding-top: 35px;
+}
+
+.footLeft{
+    float: left;
+}
+
+.footLeft img{
+    height: 42px;
+    width: 195px;
+}
+
+.footLeft p{
+    font-size: 12px;
+    color: #666;
+    margin: 20px 0 15px 0;
+}
+
+.footLeft a{
+    display: block;
+    height: 33px;
+    width: 118px;
+    color: #00a4ff;
+    border: 1px solid #00a4ff;
+    line-height: 35px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.foolRight{
+    float: right;
+}
+
+.foolRight dl{
+    float: left;
+    margin-left: 100px;
+}
+
+.foolRight dt{
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.foolRight dl dd a{
+    color: #333;
+    font-size: 12px;
+    text-decoration: none;
 }
