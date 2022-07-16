@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>淘宝焦点图布局</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .tb-promo {
+            position: relative;
+            width: 520px;
+            height: 280px;
+            margin: 100px auto;
+        }
+
+        .tb-promo img {
+            height: 280px;
+            width: 520px;
+        }
+
+        .prev,
+        .next {
+            position: absolute;
+            /* 绝对定位可直接设置宽高 */
+            top: 50%;
+            margin-top: -15px;
+            width: 20px;
+            height: 30px;
+            background-color: rgba(0, 0, 0, .3);
+            line-height: 30px;
+            text-decoration: none;
+            color: white;
+        }
+
+        .prev {
+            left: 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .next {
+            right: 0;
+            border-radius: 15px 0 0 15px;
+        }
+
+        .promo-nav {
+            position: absolute;
+            left: 50%;
+            margin-left: -35px;
+            bottom: 10px;
+            width: 70px;
+            height: 13px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 6px;
+        }
+
+        .promo-nav li {
+            float: left;
+            width: 8px;
+            height: 8px;
+            background-color: white;
+            margin-left: 5px;
+            margin-top: 2px;
+            list-style: none;
+            border-radius: 50%;
+
+        }
+
+        .promo-nav .one {
+            background-color: orange;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="tb-promo">
+        <img src="images/tb.jpg" alt="">
+        <!-- 左箭头 -->
+        <a href="#" class="prev">&lt;</a>
+        <!-- 右箭头 -->
+        <a href="#" class="next">&nbsp;&gt;</a>
+        <!-- 小圆点 -->
+        <ul class="promo-nav">
+            <li class="one"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+</body>
+
+</html>

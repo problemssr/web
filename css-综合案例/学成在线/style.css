@@ -266,6 +266,7 @@ body{
 
 .goods-down ul li{
     float: left;
+    position: relative;
     width: 228px;
     height: 270px;
     background-color: white;
@@ -274,8 +275,14 @@ body{
     margin-bottom: 15px;
 }
 
-.goods-down ul li img{
+.goods-down ul li>img{
     width: 100%;
+}
+
+.goods-down ul li em{
+    position: absolute;
+    top: 4px;
+    right: -4px;
 }
 
 .goods-down ul li h4{

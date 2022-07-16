@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>京东三角</title>
+    <style>
+        .jd {
+            position: relative;
+            height: 150px;
+            width: 200px;
+            background-color: aqua;
+            margin: 100px auto;
+        }
+
+        .jd span {
+            position: absolute;
+            right: -50px;
+            top: 50%;
+            margin-top: -25px;
+            height: 0;
+            width: 0;
+            border: 25px solid transparent;
+            border-left-color: aqua;
+        }
+
+        .box {
+            width: 170px;
+            height: 24px;
+            border: 1px solid red;
+            margin: 100px auto;
+            font-size: 12px;
+            line-height: 24px;
+            text-align: center;
+        }
+
+        .left {
+            position: relative;
+            float: left;
+            width: 90px;
+            height: 100%;
+            background-color: red;
+            color: white;
+            font-weight: 700;
+        }
+
+        .left i {
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 0;
+            width: 0;
+            border-color: transparent white transparent transparent;
+            border-style: solid;
+            border-width: 24px 10px 0 0;
+        }
+
+        .right {
+            height: 100%;
+            color: gray;
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <div class="jd">
+        <span></span>
+    </div> -->
+    <div class="box">
+        <span class="left">￥2099.00
+            <i></i>
+        </span>
+        <span class="right">￥2999.00</span>
+    </div>
+</body>
+
+</html>
