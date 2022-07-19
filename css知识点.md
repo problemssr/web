@@ -1506,3 +1506,59 @@ p::before {
 }
 ```
 
+### CSS3 盒子模型
+
+通过**box-sizing** 来指定盒模型，有2个值：即可指定为**content-box、border-box**，这样我们计算盒子大小的方式就发生了改变。
+
+可以分成两种情况：
+
+1.box-sizing: content-box 盒子大小为width + padding + border（以前默认的）
+
+2.box-sizing: border-box 盒子大小为width
+
+如果盒子模型我们改为了box-sizing: border-box，那padding和border就不会撑大盒子了（前提padding和border不会超过width宽度）
+
+1.图片变模糊
+
+##### CSS3滤镜filter
+
+filterCSS属性将模糊或颜色偏移等图形效果应用于元素。
+
+```css
+filter:函数();
+例如filter:blur(5px);  blur模糊处理 数值越大越模糊
+```
+
+2.计算盒子宽度width:calc函数
+
+##### CSS3calc函数
+
+calc() 此CSS函数让你在声明CSS属性值时执行一些计算。
+
+```css
+width: calc(100% -80px);
+```
+
+括号里面可以使用+ -*/ 来进行计算。
+
+## CSS3 过渡（重点）
+
+过渡（transition)是CSS3中具有颠覆性的特征之一，我们可以在不使用Flash 动画或JavaScript 的情况下，当元素从一种样式变换为另一种样式时为元素添加效果。
+
+**过渡动画：是从一个状态渐渐的过渡到另外一个状态**
+
+可以让我们页面更好看，更动感十足，虽然低版本浏览器不支持（ie9以下版本）但是不会影响页面布局。
+
+我们现在**经常和<u>:hover 一起搭配使用。**</u>
+
+**transition:要过渡的属性 花费时间 运动曲线 何时开始;**
+
+1.属性：想要变化的css属性，宽度高度背景颜色内外边距都可以。如果想要所有的属性都变化过渡，写一个all 就可以。
+
+2.花费时间：单位是秒（必须写单位）比如0.5s
+
+3.运动曲线：默认是ease（可以省略） 
+
+4.何时开始：单位是秒（必须写单位）可以设置延迟触发时间 默认是0s（可以省略）
+
+![image-20220716201857722](C:\Users\22982\AppData\Roaming\Typora\typora-user-images\image-20220716201857722.png)

@@ -1,0 +1,172 @@
+.main{
+    width: 980px;
+    height: 455px;
+    margin-left: 220px;
+    margin-top: 10px;
+}
+.focus{
+    float: left;
+    width: 721px;
+    height: 455px;
+}
+.newsflash{
+    float: right;
+    width: 250px;
+    height: 455px;  
+}
+.news{
+    height: 165px;
+    border: 1px solid #ccc;
+}
+.news_hd{
+    height: 33px;
+    line-height: 33px;
+    border-bottom: 1px dotted #ccc;
+    padding: 0 15px;
+}
+.news_hd h5{
+    float: left;
+    font-size: 14px;
+}
+.news_hd .more{
+    float: right;
+}
+.news_hd .more::after{
+    content: '\e64c';
+    font-family: 'iconfont';
+}
+.news_bd ul li{
+    height: 24px;
+    line-height: 24px;
+    margin: 1px 0 0 15px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.life_service{
+    height: 209px;
+    border: 1px solid #ccc;
+    border-top: 0;
+    overflow: hidden;
+}
+.life_service ul{
+    width: 252px;
+}
+.life_service ul li{
+    float: left;
+    width: 63px;
+    height: 71px;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+}
+.life_service ul li i{
+    display: inline-block;
+    width: 24px;
+    height: 28px;
+    margin-top: 12px;
+    background: url(../images/icons.png) no-repeat -17px -15px;
+}
+
+.bargain{
+    margin-top: 5px;
+}
+
+/* 推荐模块 */
+.recom{
+    height: 163px;
+    margin-top: 12px;
+    background-color: #ebebeb;
+}
+.recom_hd{
+    float: left;
+    width: 205px;
+    height: 100%;
+    background-color: #5c5c5c;
+    text-align: center;
+    padding-top: 30px;
+}
+.recom_bd{
+    float: left;
+}
+.recom_bd ul li{
+    float: left;
+    position: relative; 
+}
+.recom_bd ul li a img{
+    width: 248px;
+    height: 163px;
+}
+.recom_bd ul li:nth-child(-n+3)::after{
+    content: '';
+    position: absolute;
+    right: 0;
+    top:10px;
+    width: 1px;
+    height: 145px;
+    background-color: #ddd;
+
+}
+
+/* 家电模块 */
+.floor .w{
+    margin-top: 30px;
+}
+.box_hd{
+    height: 30px;
+    border-bottom: 2px solid #c81623;
+}
+.box_hd h3{
+    float: left;
+    font-size: 18px;
+    color: #c81623;
+    font-weight: 400;
+}
+.tab_list{
+    float: right;
+}
+.tab_list ul li{
+    float: left;
+}
+.tab_list ul li a{
+    margin: 0 15px;
+}
+
+.box_bd{
+    height: 361px;
+}
+.tab_list_item>div{
+    float: left;
+    height: 361px;
+}
+.col_210{
+    width: 210px;
+    background-color: #f9f9f9;
+    padding-left: 12px;
+    text-align: center;
+}
+.col_210 ul li{
+    float: left;
+    width: 85px;
+    height: 34px;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+    line-height: 34px;
+    margin-right: 10px;
+}
+.col_329{
+    width: 329px;
+    border-right: 1px solid #ccc;
+}
+.col_221{
+    width: 221px;
+    border-right: 1px solid #ccc;
+}
+.col_219{
+    width: 219px;
+}
+.border{
+    display: block;
+    border-bottom: 1px solid #ccc;
+}
