@@ -1562,3 +1562,258 @@ width: calc(100% -80px);
 4.何时开始：单位是秒（必须写单位）可以设置延迟触发时间 默认是0s（可以省略）
 
 ![image-20220716201857722](C:\Users\22982\AppData\Roaming\Typora\typora-user-images\image-20220716201857722.png)
+
+## 2D 转换
+
+转换（transform）是CSS3中具有颠覆性的特征之一，可以实现元素的位移、旋转、缩放等效果
+
+转换（transform）你可以简单理解为变形
+
+移动：translate
+
+旋转：rotate
+
+缩放：scale
+
+#### 二维坐标系
+
+![image-20220719122210454](C:\Users\22982\AppData\Roaming\Typora\typora-user-images\image-20220719122210454.png)
+
+#### 2D 转换之移动 translate
+
+2D移动是2D转换里面的一种功能，可以改变元素在页面中的位置，类似**定位**
+
+```css
+transform: translate(x,y);或者分开写
+transform: translateX(n);
+transform: translateY(n);
+```
+
+定义 2D 转换中的移动，沿着 X 和 Y 轴移动元素
+
+translate最大的优点：**不会影响到其他元素的位置**
+
+translate中的百分比单位是**相对于自身元素的 translate:(50%,50%);**
+
+对**行内标签**没有效果
+
+### 移动盒子位置：定位 盒子外边距 2d转换移动
+
+#### 2D 转换之旋转rotate
+
+2D旋转指的是让元素在2维平面内**顺时针旋转或者逆时针旋转**。
+
+```css
+transform:rotate(度数)
+```
+
+rotate里面跟度数， 单位是 deg比如rotate(45deg)
+
+角度为正时，顺时针，负时，为逆时针
+
+默认旋转的中心点是元素的中心点
+
+三角形
+
+```css
+p::before {
+    content: '';
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    width: 10px;
+    height: 10px;
+    border-right: 1px solid #000;
+    border-bottom: 1px solid #000;
+    transform: rotate(45deg);
+}
+```
+
+### 2D 转换中心点 transform-origin
+
+设置元素转换的中心点
+
+```css
+transform-origin: x y;
+```
+
+注意后面的参数x和 y 用空格隔开
+
+x y默认转换的中心点是**元素的中心点 (50% 50%)**
+
+还可以给x y设置**像素** 或者**方位名词**（top bottom left right center）
+
+### 2D 转换之缩放scale
+
+缩放，顾名思义，可以放大和缩小。元素添加上这个属性控制它放大还是缩小。
+
+```css
+transform:scale(x,y);
+```
+
+注意
+
+注意其中的x和y用逗号分隔
+
+transform:scale(1,1)：宽和高都放大一倍，相对于没有放大
+
+transform:scale(2,2)：宽和高都放大了2倍
+
+transform:scale(2)：只写一个参数，第二个参数则和第一个参数一样，相当于 scale(2,2)
+
+transform:scale(0.5,0.5)：缩小
+
+sacle缩放最大的优势：可以**设置转换中心点缩放，默认以中心点缩放的，而且不影响其他盒子**
+
+### 2D 转换综合写法
+
+1.同时使用多个转换，其格式为：**transform: translate() rotate() scale()** ...等
+
+2.其顺序会影转换的效果。（先旋转会改变坐标轴方向）
+
+3.当我们同时有位移和其他属性的时候，记得要将位移放到最前
+
+### 2D 转换总结
+
+转换transform 我们简单理解就是变形 有2D 和 3D 之分
+
+我们暂且学了三个 分别是 位移 旋转 和 缩放
+
+2D 移动 **translate(x,y)最大的优势是不影响其他盒子， 里面参数用%**，是相对于自身宽度和高度来计算的
+
+可以分开写比如 translateX(x)和 translateY(y)
+
+2D 旋转 rotate(度数)可以实现旋转元素 **度数的单位是deg**
+
+2D 缩放 sacle(x,y)里面参数是数字 不跟单位 可以是小数**最大的优势不影响其他盒子**
+
+设置转换中心点 transform-origin :xy;参数可以**百分比、像素或者是方位名词**
+
+当我们进行综合写法，同时**有位移和其他属性的时候，记得要将位移放到最前**
+
+## CSS3 动画
+
+动画（animation）是CSS3中具有颠覆性的特征之一，可通过设置多个节点来精确控制一个或一组动画，常用来实现复杂的动画效果。
+
+相比较过渡，动画可以实现更多变化，更多控制，连续自动播放等效果。
+
+**动画的基本使用**
+
+制作动画分为两步：
+
+1.先定义动画
+
+2.再使用（调用）动画
+
+##### 用keyframes 定义动画（类似定义类选择器）
+
+```css
+@keyframes 动画名称{
+	0%{
+		width:100px;
+	}
+	100%{
+		width:200px;
+	}
+}
+```
+
+##### 1.动画序列
+
+0% 是动画的**开始**，100% 是动画的**完成**。这样的规则就是动画序列。
+
+在**@keyframes** 中规定某项CSS 样式，就能创建由当前样式逐渐改为新样式的动画效果。
+
+动画是使元素从一种样式逐渐变化为另一种样式的效果。您可以改变任意多的样式任意多的**次数**。
+
+请用百分比来规定变化发生的时间，或用关键词 **"from" 和 "to"**，等同于 0%和 100%
+
+![image-20220719184246849](C:\Users\22982\AppData\Roaming\Typora\typora-user-images\image-20220719184246849.png)
+
+##### 2.元素使用动画
+
+```css
+div {
+    width: 200px;
+    height: 200px;
+    background-color: aqua;
+    margin: 100px auto;
+    /*调用动画*/
+    animation-name:动画名称;
+    /*持续时间*/
+    animation-duration:持续时间;
+}
+```
+
+#### 动画常用属性
+
+![image-20220719184558477](C:\Users\22982\AppData\Roaming\Typora\typora-user-images\image-20220719184558477.png)
+
+#### 动画简写属性
+
+animation：动画名称 持续时间运动曲线何时开始播放次数 是否反方向 动画起始或者结束的状态;
+
+```css
+animation: myfirst 5s linear 2s infinite alternate;
+```
+
+简写属性里面不包含 animation-play-state
+
+暂停动画：**animation-play-state:puased;经常和鼠标经过等其他配合使用**
+
+想要**动画走回来 ，而不是直接跳回来：animation-direction：alternate**
+
+盒子**动画结束后，停在结束位置： animation-fill-mode：forwards**
+
+```css
+.city div[class^="pulse"] {
+    /* 在父盒子内水平垂直居中 */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px;
+    height: 8px;
+    box-shadow: 0 0 12px #009dfd;
+    border-radius: 50%;
+}
+```
+
+
+
+#### 速度曲线细节
+
+animation-timing-function：规定动画的速度曲线，默认是“ease”
+
+![image-20220719185111631](C:\Users\22982\AppData\Roaming\Typora\typora-user-images\image-20220719185111631.png)
+
+## CSS3 3D转换
+
+#### 特点
+
+近大远小
+
+物体后面遮挡不可见
+
+当我们在网页上构建3D效果的时候参考这些特点就能产出3D效果。
+
+#### 三维坐标系
+
+三维坐标系其实就是指立体空间，立体空间是由3个轴共同组成的。
+
+x轴：水平向右注意：x右边是正值，左边是负值
+
+y轴：垂直向下注意：y 下面是正值，上面是负值
+
+z轴：垂直屏幕注意：往外面是正值，往里面是负值
+
+3D 转换我们主要学习工作中最常用的 3D 位移 和3D 旋转
+
+**3D位移: translate3d(x,y,z)**
+
+**3D旋转: rotate3d(x,y,z)**
+
+透视: perspective3D呈现 transfrom-style
+
+## 浏览器私有前缀
+
