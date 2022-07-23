@@ -207,8 +207,281 @@ img,a { -webkit-touch-callout: none; }
 
 **二倍精灵图做法**
 
-在firework里面把精灵图等比例缩放为原来的一半
+在firework里面把<u>精灵图等比例缩放为原来的一半</u>
 
-之后根据大小测量坐标
+之后根据<u>大小测量坐标</u>
 
-注意代码里面background-size也要写：精灵图原来宽度的一半
+注意代码里面<u>background-size也要写：**精灵图原来宽度的一半**</u>
+
+------
+
+# flex布局
+
+flex 弹性布局
+
+操作方便，布局极为简单，移动端应用很广泛
+
+PC 端浏览器支持情况较差
+
+IE 11或更低版本，不支持或仅部分支持
+
+布局原理
+
+flex 是flexible Box 的缩写，意为"弹性布局"，用来为盒状模型提供最大的灵活性，任何一个容器都可以指定为flex 布局。
+
+当我们为父盒子设为flex 布局以后，子元素的float、clear和vertical-align属性将失效。
+
+伸缩布局=弹性布局=伸缩盒布局=弹性盒布局=flex布局
+
+### 总结
+
+#### flex布局原理：就是通过给父盒子添加flex属性，来控制子盒子的位置和排列方式
+
+### flex布局父项常见属性
+
+#### flex-direction设置主轴的方向
+
+##### 1.主轴与侧轴
+
+在flex布局中，是分为主轴和侧轴两个方向，同样的叫法有：行和列、x轴和y轴
+
+默认主轴方向就是x轴方向，水平向右
+
+默认侧轴方向就是y轴方向，水平向下
+
+![image-20220721170740012](C:\Users\22982\AppData\Roaming\Typora\typora-user-images\image-20220721170740012.png)
+
+flex-direction属性决定主轴的方向（即项目的排列方向）
+
+注意：主轴和侧轴是会变化的，就看flex-direction设置谁为主轴，剩下的就是侧轴。而我们的子元素是跟着主轴来排列的
+
+![image-20220721170801940](C:\Users\22982\AppData\Roaming\Typora\typora-user-images\image-20220721170801940.png)
+
+####  justify-content设置主轴上的子元素排列方式
+
+justify-content 属性定义了项目在主轴上的对齐方式
+
+**注意：使用这个属性之前一定要确定好主轴是哪个**
+
+![image-20220721170912605](C:\Users\22982\AppData\Roaming\Typora\typora-user-images\image-20220721170912605.png)
+
+#### flex-wrap设置子元素是否换行
+
+默认情况下，项目都排在一条线（又称”轴线”）上。flex-wrap属性定义，flex布局中默认是不换行的。
+
+![image-20220721170933413](C:\Users\22982\AppData\Roaming\Typora\typora-user-images\image-20220721170933413.png)
+
+#### align-items设置侧轴上的子元素排列方式（单行）
+
+该属性是控制子项在侧轴（默认是y轴）上的排列方式 在子项为单项（单行）的时候使用
+
+![image-20220721171002829](C:\Users\22982\AppData\Roaming\Typora\typora-user-images\image-20220721171002829.png)
+
+#### align-content 设置侧轴上的子元素的排列方式（多行）
+
+设置子项在侧轴上的排列方式并且只能用于子项出现换行的情况（多行），在单行下是没有效果的。
+
+![image-20220721171031413](C:\Users\22982\AppData\Roaming\Typora\typora-user-images\image-20220721171031413.png)
+
+#### align-content和align-items 区别
+
+align-items 适用于单行情况下，只有上对齐、下对齐、居中和拉伸
+
+align-content 适应于换行（多行）的情况下（单行情况下无效），可以设置上对齐、下对齐、居中、拉伸以及平均分配剩余空间等属性值。
+
+总结就是单行找align-items 多行找align-content
+
+![image-20220721171107853](C:\Users\22982\AppData\Roaming\Typora\typora-user-images\image-20220721171107853.png)
+
+#### flex-flow
+
+flex-flow 属性是flex-direction 和flex-wrap 属性的复合属性
+
+```css
+flex-flow:row wrap;
+```
+
+flex-direction：设置主轴的方向
+
+justify-content：设置主轴上的子元素排列方式
+
+flex-wrap：设置子元素是否换行
+
+align-content：设置侧轴上的子元素的排列方式（多行）
+
+align-items：设置侧轴上的子元素排列方式（单行）
+
+flex-flow：复合属性，相当于同时设置了flex-direction 和 flex-wrap
+
+## flex布局子项常见属性
+
+#### flex 属性
+
+flex 属性定义子项目分配剩余空间，用flex来表示占多少份数。
+
+```css
+.item {
+	flex: <number>; /* default 0 */
+}
+```
+
+####  align-self控制子项自己在侧轴上的排列方式
+
+align-self 属性允许单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性。默认值为auto，表示继承父元素的align-items属性，如果没有父元素，则等同于stretch。
+
+```css
+span:nth-child(2) {
+    /*设置自己在侧轴上的排列方式*/
+	align-self: flex-end;
+}
+```
+
+#### order属性定义项目的排列顺序
+
+数值越小，排列越靠前，默认为0。
+
+注意：和 z-index 不一样。
+
+```css
+.item {
+	order: <number>;
+}
+```
+
+------
+
+### 属性选择器改图片
+
+```css
+/* 属性选择器改图片 */
+.local-nav li [class^="local-nav-icon"]{
+    width: 32px;
+    height: 32px;
+    background: url(../images/localnav_bg.png) no-repeat 0 0;
+    background-size: 32px auto;
+}
+.local-nav li .local-nav-icon-icon2{
+    background: url(../images/localnav_bg.png) no-repeat 0 -32px;
+    background-size: 32px auto;
+}
+.local-nav li .local-nav-icon-icon3{
+    background: url(../images/localnav_bg.png) no-repeat 0 -64px;
+    background-size: 32px auto;
+}
+.local-nav li .local-nav-icon-icon4{
+    background: url(../images/localnav_bg.png) no-repeat 0 -96px;
+    background-size: 32px auto;
+}
+.local-nav li .local-nav-icon-icon5{
+    background: url(../images/localnav_bg.png) no-repeat 0 -128px;
+    background-size: 32px auto;
+}
+```
+
+```html
+<ul class="local-nav">
+    <li>
+        <a href="#" title="景点·玩乐">
+            <span class="local-nav-icon-icon1"></span>
+            <span>景点·玩乐</span>
+        </a>
+    </li>
+    <li>
+        <a href="#" title="景点·玩乐">
+            <span class="local-nav-icon-icon2"></span>
+            <span>景点·玩乐</span>
+        </a>
+    </li>
+    <li>
+        <a href="#" title="景点·玩乐">
+            <span class="local-nav-icon-icon3"></span>
+            <span>景点·玩乐</span>
+        </a>
+    </li>
+    <li>
+        <a href="#" title="景点·玩乐">
+            <span class="local-nav-icon-icon4"></span>
+            <span>景点·玩乐</span>
+        </a>
+    </li>
+    <li>
+        <a href="#" title="景点·玩乐">
+            <span class="local-nav-icon-icon5"></span>
+            <span>景点·玩乐</span>
+        </a>
+    </li>
+</ul>
+```
+
+### 背景线性渐变
+
+![image-20220723122057841](C:\Users\22982\AppData\Roaming\Typora\typora-user-images\image-20220723122057841.png)
+
+```css
+background: linear-gradient(起始方向,颜色1,颜色2,...);
+background: -webkit-linear-gradient(left, red,blue);
+background: -webkit-linear-gradient(left,top,red,blue);
+```
+
+背景渐变必须添加浏览器私有前缀
+
+起始方向可以是：方位名词 或者度数，如果省略默认就是top
+
+------
+
+# rem适配布局
+
+### rem 基础
+
+#### 1.rem 单位
+
+rem (root em)是一个相对单位，类似于em，em是父元素字体大小。
+
+不同的是**rem**的基准是相对于**html元素的字体大小**。
+
+比如，根元素（html）设置font-size=12px; 非根元素设置width:2rem;则换成px表示就是24px。
+
+rem的优势：父元素文字大小可能不一致，但是整个页面只有一个html，可以很好来控制整个页面的元素大小
+
+```css
+/*根html为12px */
+html {
+	font-size: 12px;
+}
+/*此时div的字体大小就是24px */
+div {
+	font-size: 2rem;
+}
+```
+
+#### 2.媒体查询
+
+媒体查询（Media Query）是CSS3新语法。
+
+使用@media 查询，可以针对不同的媒体类型定义不同的样式
+
+@media 可以针对不同的屏幕尺寸设置不同的样式
+
+当你重置浏览器大小的过程中，页面也会根据浏览器的宽度和高度重新渲染页面
+
+目前针对很多苹果手机、Android手机，平板等设备都用得到多媒体查询
+
+```css
+@media mediatype and|not|only (media feature) {
+	CSS-Code;
+}
+```
+
+用@media 开头注意@符号
+
+mediatype 媒体类型
+
+关键字and not only
+
+media feature媒体特性必须有小括号包含
+
+1. mediatype 查询类型
+
+   将不同的终端设备划分成不同的类型，称为媒体类型
+
+![image-20220723150241836](C:\Users\22982\AppData\Roaming\Typora\typora-user-images\image-20220723150241836.png)
