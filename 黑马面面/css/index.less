@@ -1,0 +1,252 @@
+body {
+    min-width: 320px;
+    max-width: 750px;
+    margin: 0 auto;
+    background-color: #F2F4F7;
+}
+
+a {
+    text-decoration: none;
+    color: #707070;
+}
+
+@media screen and (min-width:750px) {
+    html {
+        font-size: 37.5px !important;
+    }
+}
+
+.wrap {
+    background-color: #fff;
+
+    .header {
+        height: 2.1333rem;
+        border-bottom: 1px solid #EAEAEA;
+        text-align: center;
+        line-height: 2.1333rem;
+        color: #1C1C1C;
+        font-size: .9333rem;
+    }
+
+    .nav {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 1.2rem 0 1.6rem 0;
+
+        .item {
+            flex: 33.33%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            img {
+                width: 3.7067rem;
+                height: 3.7067rem;
+            }
+
+            span {
+                font-size: .6667rem;
+            }
+
+            &:nth-child(-n+3) {
+                margin-bottom: 1.6533rem;
+            }
+        }
+    }
+
+    .go {
+        padding: 0 .48rem 1.1467rem;
+    }
+}
+
+.content {
+    margin: .2667rem 0;
+    padding: 1.0667rem .64rem;
+    background-color: #fff;
+
+    .con-hd {
+        height: 1.0133rem;
+        display: flex;
+        justify-content: space-between;
+        text-align: center;
+        line-height: 1.0133rem;
+
+        h4 {
+            margin: 0;
+            font-size: .7467rem;
+            color: #333;
+
+            &::before {
+                content: '';
+                display: inline-block;
+                width: 1.0133rem;
+                height: 1.0133rem;
+                background: url(../icons/i2.png) no-repeat;
+                background-size: 1.0133rem auto;
+                vertical-align: middle;
+            }
+        }
+
+        .more {
+            font-size: .5867rem;
+            color: #999;
+        }
+    }
+
+    .con-bd {
+        position: relative;
+        margin-top: .9067rem;
+
+        .swiper-container {
+            // width: 100%;
+            height: 100%;
+            width: 14.4rem;
+        }
+
+        .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            background: #fff;
+
+            /* Center slide text vertically */
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            flex-direction: column;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+            transition: 300ms;
+            // 其余兄弟
+            transform: scale(0.8);
+            opacity: 0.4;
+
+            a {
+                width: 9.0133rem;
+                height: 10.0267rem;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+
+            p {
+                width: 9.0133rem;
+                font-size: .6667rem;
+                margin-top: .64rem;
+                color: #333;
+            }
+        }
+
+        //   当前激活
+        .swiper-slide-active,
+        .swiper-slide-duplicate-active {
+            transform: scale(1);
+            z-index: 999;
+            opacity: 1;
+        }
+
+        .swiper-button-prev {
+            &::after {
+                font-size: 1.066667rem;
+                color: #333;
+            }
+        }
+
+        .swiper-button-next {
+            &::after {
+                font-size: 1.066667rem;
+                color: #333;
+            }
+        }
+    }
+}
+
+.study {
+    overflow: hidden;
+
+    .con-hd {
+        margin-bottom: .5333rem;
+
+        .pic {
+            &::before {
+                content: '';
+                display: inline-block;
+                width: 1.0133rem;
+                height: 1.0133rem;
+                background: url(../icons/i1.png) no-repeat;
+                background-size: 1.0133rem auto;
+            }
+        }
+    }
+
+    .study-bd {
+        padding-bottom: 3.7333rem;
+
+        .mySwiper {
+            padding: 0.266667rem;
+        }
+
+        .swiper-slide {
+            font-size: 18px;
+            background: #fff;
+            width: 7.7333rem;
+            height: 9.0667rem;
+            border-radius: .2667rem;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+
+            h5 {
+                font-size: 0.693333rem;
+                margin: 0.533333rem 0;
+                font-weight: 400;
+                padding: 0 0.266667rem;
+            }
+
+            p {
+                font-size: 0.693333rem;
+                color: #ff4400;
+                padding: 0 0.266667rem;
+            }
+        }
+    }
+
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    height: 2.9333rem;
+    width: 100%;
+    z-index: 999;
+    background-color: #fff;
+    display: flex;
+    padding: .5067rem;
+    border-top: 1px solid #ccc;
+
+    .item {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        img {
+            width: 1.04rem;
+            height: 1.04rem;
+        }
+
+        p {
+            font-size: 0.586667rem;
+            color: #666666;
+            margin-top: 0.266667rem;
+        }
+    }
+}
