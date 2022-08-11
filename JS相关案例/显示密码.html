@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>显示密码</title>
+    <style>
+        .box {
+            position: relative;
+            margin: 100px auto;
+            width: 500px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .box input {
+            width: 400px;
+            height: 30px;
+            border: 0;
+            outline: none;
+        }
+
+        .box img {
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 24px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <label for="">
+            <img src="images/close.png" alt="">
+        </label>
+        <input type="password">
+    </div>
+
+    <!-- 排他算法 -->
+    <button>按钮1</button>
+    <button>按钮2</button>
+    <button>按钮3</button>
+    <button>按钮4</button>
+    <button>按钮5</button>
+    <script>
+        var inp = document.querySelector('input');
+        var img = document.querySelector('.box label img');
+        var flag = 0;
+        img.onclick = function () {
+            if (flag == 0) {
+                img.src = 'images/open.png';
+                inp.type = "text";
+            } else {
+                img.src = 'images/close.png';
+                // this.style = "border:1px solid red;"
+                inp.type = "password";
+            }
+            flag = !flag;
+        }
+
+        var btns = document.getElementsByTagName('button');
+        for (let i = 0; i < btns.length; i++) {
+            btns[i].onclick = function () {
+                for (let j = 0; j < btns.length; j++) {
+                    btns[j].style.backgroundColor = "";
+                }
+                this.style.backgroundColor = "pink";
+            }
+
+        }
+    </script>
+</body>
+
+</html>

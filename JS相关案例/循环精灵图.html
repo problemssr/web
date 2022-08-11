@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=\, initial-scale=1.0">
+    <title>精灵图</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            list-style-type: none;
+        }
+
+        .box {
+            width: 250px;
+            margin: 100px auto;
+        }
+
+        .box li {
+            float: left;
+            width: 24px;
+            height: 24px;
+            background-color: pink;
+            margin: 15px;
+            /* background: url(images/sprite.png) no-repeat; */
+        }
+    </style>
+</head>
+
+<body>
+    <ul class="box">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+
+    <div><input type="text" value="手机" style="color:#999;"></div>
+    <script>
+        var li = document.querySelectorAll('li');
+        for (let i = 0; i < li.length; i++) {
+            li[i].style.background = "url(images/sprite.png) no-repeat 0 -" + 44 * i + "px";
+        }
+        var text = document.querySelector('input');
+        text.onfocus = function () {
+            if (text.value === "手机") {
+                this.value = "";
+            }
+            this.style.color = "#333";
+        }
+        text.onblur = function () {
+            if (text.value === "") {
+                text.value = "手机"
+            }
+            this.style.color = "#999";
+        }
+    </script>
+</body>
+
+</html>

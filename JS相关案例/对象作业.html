@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>对象</title>
+</head>
+
+<body>
+
+    <script>
+        var computer = {
+            color: "red",
+            weight: "120kg",
+            brand: "bwm",
+            see: function (movie) {
+                console.log(movie);
+            },
+            listen: function (music) {
+                console.log(music);
+            }
+        }
+        console.log(computer.brand);
+        console.log(computer.color);
+        console.log(computer.weight);
+
+        function reverse(list) {
+            let j = 0;
+            for (let i = (list.length - 1) / 2; i >= 0; i--) {
+                let t = list[j];
+                list[j] = list[list.length - j - 1];
+                list[list.length - j - 1] = t;
+                j++;
+            }
+            return list;
+        }
+        console.log(reverse([1, 2, 3, 5, 7, 8, 4, 5]));
+
+        function sort(list) {
+            for (let i = 0; i < list.length; i++) {
+                for (let j = 0; j < list.length; j++) {
+                    if (list[i] < list[j]) {
+                        t = list[i];
+                        list[i] = list[j];
+                        list[j] = t;
+                    }
+                }
+
+            }
+            return list;
+        }
+        console.log(sort([1, 2, 3, 5, 7, 8, 4, 5]));
+    </script>
+</body>
+
+</html>

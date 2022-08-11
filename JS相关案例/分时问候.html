@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM笔记</title>
+</head>
+
+<body>
+    <img src="images/1.jpg" style="width: 200px;height: 200px;">
+    <div>上午好</div>
+    <script>
+        // 根据系统不同时间来判断，所以需要用到日期内置对象
+        // 利用多分支语句来设置不同的图片
+        // 需要一个图片，并且根据时间修改图片，就需要用到操作元素src属性
+        var images = document.querySelector('img');
+        var div = document.querySelector('div');
+
+        var date = new Date('2001-7-9 17:00:22');
+        var date = new Date('2001-7-9 1:00:22');
+        var h = date.getHours();
+        // 需要一个div元素，显示不同问候语，修改元素内容即可
+
+        if (h < 12) {
+            images.src = 'images/2.jpg';
+            div.innerHTML = '上午哈哈哈';
+        } else {
+            images.src = 'images/1.jpg';
+            div.innerHTML = '下午啦啦啦';
+        }
+    </script>
+</body>
+
+</html>
