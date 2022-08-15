@@ -909,3 +909,430 @@ else {
 window对象给我们提供了一个history对象，**与浏览器历史记录进行交互**。该对象包含用户（在浏览器窗口中)访问过的URL。
 
 ![image-20220811124439206](C:\Users\22982\AppData\Roaming\Typora\typora-user-images\image-20220811124439206.png)
+
+## PC端网页特效
+
+1. ### 元素偏移量offset
+
+   1. offset概述
+
+      **动态得到该元素位置（偏移）、大小等**
+
+      - 获得元素距离带定位父元素的位置
+      - 获得元素自身大小（宽度高度）
+      - 注：返回数值**不带单位**
+
+      ![image-20220813095943335](C:\Users\22982\AppData\Roaming\Typora\typora-user-images\image-20220813095943335.png)
+
+   2. offset和style区别
+
+      ![image-20220813101043772](C:\Users\22982\AppData\Roaming\Typora\typora-user-images\image-20220813101043772.png)
+      
+      **页面拖拽原理：鼠标按下（mousedown），鼠标移动（mousemove），鼠标松开（moseup）**
+      
+      **模态框移动计算核心：鼠标坐标减去鼠标在盒子内坐标**
+      
+      ![image-20220813203146513](C:\Users\22982\AppData\Roaming\Typora\typora-user-images\image-20220813203146513.png)
+
+2. ### 元素可视区client
+
+   1. client概述
+
+      client翻译过来就是客户端，我们使用client系列的相关属性来获取元素可视区的相关信息
+      通过client系列的相关属性可以动态的得到该元素的边框大小、元素大小等。
+
+      ![image-20220813232226274](C:\Users\22982\AppData\Roaming\Typora\typora-user-images\image-20220813232226274.png)
+
+   2. 立即执行函数
+
+      立即执行函数: **不需要调用，立马能够自己执行的函数**
+      
+      最大的作用就是 **独立创建了一个作用域, 里面所有的变量都是局部变量 不会有命名冲突的情况**
+      
+      ```html
+      <body>
+          <script>
+              // 1.立即执行函数: 不需要调用，立马能够自己执行的函数
+              function fn() {
+                  console.log(1);
+      
+              }
+              fn();
+              // 2. 写法 也可以传递参数进来
+              // 1.(function() {})()    或者  2. (function(){}());
+              (function(a, b) {
+                  console.log(a + b);
+                  var num = 10;
+              })(1, 2); // 第二个小括号可以看做是调用函数
+              (function sum(a, b) {
+                  console.log(a + b);
+                  var num = 10; // 局部变量
+              }(2, 3));
+          </script>
+      </body>
+      ```
+
+3. ### 元素滚动scoll
+
+   scroll翻译过来就是滚动的，我们使用scroll系列的相关属性可以**动态的得到该元素的大小、滚动距离等。**
+
+   ![image-20220814231041267](C:\Users\22982\AppData\Roaming\Typora\typora-user-images\image-20220814231041267.png)
+
+   ##### 页面被卷去的头部
+
+   如果浏览器的高（或宽）度不足以显示整个页面时，会自动出现滚动条。**当滚动条向下滚动时，页面上面被隐藏掉的高度**，我们就称为页面被卷去的头部。滚动条在滚动时会触发onscroll事件。
+
+   案例：
+
+   1. 需要用到页面滚动事件scroll因为是页面滚动，所以事件源是document
+   2. 滚动到某个位置，就是判断页面被卷去的上部值。
+   3. **页面被卷去的头部:可以通过window.pageYoffset获得如果是被卷去的左侧window.pageXOffset**
+   4. **注意，元素被卷去的头部是element.scrollTop ,如果是页面被卷去的头部则是window.pageYOffset**
+
+4. 总结
+
+   ![image-20220814235713936](C:\Users\22982\AppData\Roaming\Typora\typora-user-images\image-20220814235713936.png)
+
+   ![image-20220814235816976](C:\Users\22982\AppData\Roaming\Typora\typora-user-images\image-20220814235816976.png)
+
+   1. **offset系列 经常用于获得<u>元素位置</u>offsetLeft offsetTop**
+   2. **client 经常用于获取<u>元素大小</u> clientWidth clientHeight**
+   3. **scroll 经常用于获取<u>滚动距离</u>scrollTop scrolleft**
+   4. **注意页面滚动的距离通过window. pagexoffset获得**
+
+5. **mouseover和mouseenter区别**
+
+   1. 鼠标移到元素上会触发mouseenter事件
+   2. **mouseover鼠标经过自身盒子会触发，经过子盒子也会触发。mouseenter只经过自身盒子触发，因为不会冒泡，mouseleave鼠标离开也不会冒泡**
+
+6. ### 动画函数封装
+
+   1.   动画原理
+
+      **核心：通过定时器setInterval不断移动盒子位置**
+
+      1. 获得盒子当前位置
+
+      2. 让盒子在当前位置加上1个移动距离
+
+      3. 利用定时器不断重复这个操作
+
+      4. 加一个结束定时器的条件
+
+      5. 注意此元素需要添加定位， 才能使用element.style.left
+
+   2. 动画函数简单封装
+
+      注：函数需传递2个参数，**动画对象和移动到的距离**
+
+      ```html
+          <style>
+              div {
+                  position: absolute;
+                  left: 0;
+                  width: 100px;
+                  height: 100px;
+                  background-color: pink;
+              }
+              
+              span {
+                  position: absolute;
+                  left: 0;
+                  top: 200px;
+                  display: block;
+                  width: 150px;
+                  height: 150px;
+                  background-color: purple;
+              }
+          </style>
+      
+      <body>
+          <div></div>
+          <span>夏雨荷</span>
+          <script>
+              // 简单动画函数封装obj目标对象 target 目标位置
+              function animate(obj, target) {
+                  var timer = setInterval(function() {
+                      if (obj.offsetLeft >= target) {
+                          // 停止动画 本质是停止定时器
+                          clearInterval(timer);
+                      }
+                      obj.style.left = obj.offsetLeft + 1 + 'px';
+      
+                  }, 30);
+              }
+      
+              var div = document.querySelector('div');
+              var span = document.querySelector('span');
+              // 调用函数
+              animate(div, 300);
+              animate(span, 200);
+          </script>
+      </body>
+      ```
+
+   3. 动画函数给不同元素记录不同定时器
+
+      给多个元素都是用该动画函数，每次都要var声明定时器，由此可以给不同元素使用不同定时器（自己专门用自己的定时器）
+
+      **核心：js是一种动态语言，很方便给当前对象添加属性**
+
+      ```html
+      <body>
+          <button>点击夏雨荷才走</button>
+          <div></div>
+          <span>夏雨荷</span>
+          <script>
+              // var obj = {};
+              // obj.name = 'andy';
+              // 简单动画函数封装obj目标对象 target 目标位置
+              // 给不同的元素指定了不同的定时器
+              function animate(obj, target) {
+                  // 当我们不断的点击按钮，这个元素的速度会越来越快，因为开启了太多的定时器
+                  // 解决方案就是 让我们元素只有一个定时器执行
+                  // 先清除以前的定时器，只保留当前的一个定时器执行
+                  clearInterval(obj.timer);
+                  obj.timer = setInterval(function() {
+                      if (obj.offsetLeft >= target) {
+                          // 停止动画 本质是停止定时器
+                          clearInterval(obj.timer);
+                      }
+                      obj.style.left = obj.offsetLeft + 1 + 'px';
+      
+                  }, 30);
+              }
+      
+              var div = document.querySelector('div');
+              var span = document.querySelector('span');
+              var btn = document.querySelector('button');
+              // 调用函数
+              animate(div, 300);
+              btn.addEventListener('click', function() {
+                  animate(span, 200);
+              })
+          </script>
+      </body>
+      ```
+
+   4. 缓动效果原理
+
+      **让元素运动速度有所变化，最常见让速度慢慢停下**
+
+      ​    思路：
+
+      ​    1. 让盒子每次移动的距离慢慢变小， 速度就会慢慢落下来。
+
+      ​    2. 核心算法：(目标值 - 现在的位置) / 10 做为每次移动的距离 步长
+
+             3. 停止的条件是： 让当前盒子位置等于目标位置就停止定时器
+             4. 注意步长值需要调整
+
+      ```html
+      <body>
+          <button>点击夏雨荷才走</button>
+          <span>夏雨荷</span>
+          <script>
+              // 缓动动画函数封装obj目标对象 target 目标位置
+              // 思路：
+              // 1. 让盒子每次移动的距离慢慢变小， 速度就会慢慢落下来。
+              // 2. 核心算法：(目标值 - 现在的位置) / 10 做为每次移动的距离 步长
+              // 3. 停止的条件是： 让当前盒子位置等于目标位置就停止定时器
+              function animate(obj, target) {
+                  // 先清除以前的定时器，只保留当前的一个定时器执行
+                  clearInterval(obj.timer);
+                  obj.timer = setInterval(function () {
+                      // 步长值写到定时器的里面
+                      var step = (target - obj.offsetLeft) / 10;
+                      if (obj.offsetLeft == target) {
+                          // 停止动画 本质是停止定时器
+                          clearInterval(obj.timer);
+                      }
+                      // 把每次加1 这个步长值改为一个慢慢变小的值  步长公式：(目标值 - 现在的位置) / 10
+                      obj.style.left = obj.offsetLeft + step + 'px';
+      
+                  }, 15);
+              }
+              var span = document.querySelector('span');
+              var btn = document.querySelector('button');
+      
+              btn.addEventListener('click', function () {
+                  // 调用函数
+                  animate(span, 500);
+              })
+              // 匀速动画 就是 盒子是当前的位置 +  固定的值 10 
+              // 缓动动画就是  盒子当前的位置 + 变化的值(目标值 - 现在的位置) / 10）
+          </script>
+      </body>
+      ```
+
+   5. 动画函数多个目标值之间移动
+
+      案例：动画函数800移到500
+
+      核心：点击按钮时，判断步长是正值还是负值
+
+      1. 正值，步长往大了取整（ceil）
+      2. 负值，步长往小了取整（floor）
+
+      ```html
+      <body>
+          <button class="btn500">点击夏雨荷到500</button>
+          <button class="btn800">点击夏雨荷到800</button>
+          <span>夏雨荷</span>
+          <script>
+              // 缓动动画函数封装obj目标对象 target 目标位置
+              // 思路：
+              // 1. 让盒子每次移动的距离慢慢变小， 速度就会慢慢落下来。
+              // 2. 核心算法：(目标值 - 现在的位置) / 10 做为每次移动的距离 步长
+              // 3. 停止的条件是： 让当前盒子位置等于目标位置就停止定时器
+              function animate(obj, target) {
+                  // 先清除以前的定时器，只保留当前的一个定时器执行
+                  clearInterval(obj.timer);
+                  obj.timer = setInterval(function() {
+                      // 步长值写到定时器的里面
+                      // 把我们步长值改为整数 不要出现小数的问题
+                      // var step = Math.ceil((target - obj.offsetLeft) / 10);
+                      var step = (target - obj.offsetLeft) / 10;
+                      step = step > 0 ? Math.ceil(step) : Math.floor(step);
+                      if (obj.offsetLeft == target) {
+                          // 停止动画 本质是停止定时器
+                          clearInterval(obj.timer);
+                      }
+                      // 把每次加1 这个步长值改为一个慢慢变小的值  步长公式：(目标值 - 现在的位置) / 10
+                      obj.style.left = obj.offsetLeft + step + 'px';
+      
+                  }, 15);
+              }
+              var span = document.querySelector('span');
+              var btn500 = document.querySelector('.btn500');
+              var btn800 = document.querySelector('.btn800');
+      
+              btn500.addEventListener('click', function() {
+                  // 调用函数
+                  animate(span, 500);
+              })
+              btn800.addEventListener('click', function() {
+                      // 调用函数
+                      animate(span, 800);
+                  })
+                  // 匀速动画 就是 盒子是当前的位置 +  固定的值 10 
+                  // 缓动动画就是  盒子当前的位置 + 变化的值(目标值 - 现在的位置) / 10）
+          </script>
+      </body>
+      ```
+
+   6. 动画函数添加回调函数
+
+      **回调函数原理：函数可作为一个参数，将这个函数作为参数传到另一个函数里，当那个函数执行完成后，再执行传进去的这个函数**
+
+      ```html
+      <body>
+          <button class="btn500">点击夏雨荷到500</button>
+          <button class="btn800">点击夏雨荷到800</button>
+          <span>夏雨荷</span>
+          <script>
+              // 缓动动画函数封装obj目标对象 target 目标位置
+              // 思路：
+              // 1. 让盒子每次移动的距离慢慢变小， 速度就会慢慢落下来。
+              // 2. 核心算法：(目标值 - 现在的位置) / 10 做为每次移动的距离 步长
+              // 3. 停止的条件是： 让当前盒子位置等于目标位置就停止定时器
+              function animate(obj, target, callback) {
+                  // console.log(callback);  callback = function() {}  调用的时候 callback()
+      
+                  // 先清除以前的定时器，只保留当前的一个定时器执行
+                  clearInterval(obj.timer);
+                  obj.timer = setInterval(function() {
+                      // 步长值写到定时器的里面
+                      // 把我们步长值改为整数 不要出现小数的问题
+                      // var step = Math.ceil((target - obj.offsetLeft) / 10);
+                      var step = (target - obj.offsetLeft) / 10;
+                      step = step > 0 ? Math.ceil(step) : Math.floor(step);
+                      if (obj.offsetLeft == target) {
+                          // 停止动画 本质是停止定时器
+                          clearInterval(obj.timer);
+                          // 回调函数写到定时器结束里面
+                          if (callback) {
+                              // 调用函数
+                              callback();
+                          }
+                      }
+                      // 把每次加1 这个步长值改为一个慢慢变小的值  步长公式：(目标值 - 现在的位置) / 10
+                      obj.style.left = obj.offsetLeft + step + 'px';
+      
+                  }, 15);
+              }
+              var span = document.querySelector('span');
+              var btn500 = document.querySelector('.btn500');
+              var btn800 = document.querySelector('.btn800');
+      
+              btn500.addEventListener('click', function() {
+                  // 调用函数
+                  animate(span, 500);
+              })
+              btn800.addEventListener('click', function() {
+                      // 调用函数
+                      animate(span, 800, function() {
+                          // alert('你好吗');
+                          span.style.backgroundColor = 'red';
+                      });
+                  })
+                  // 匀速动画 就是 盒子是当前的位置 +  固定的值 10 
+                  // 缓动动画就是  盒子当前的位置 + 变化的值(目标值 - 现在的位置) / 10）
+          </script>
+      </body>
+      ```
+
+   7. 动画函数封装到单独js文件
+
+      animate文件
+
+7. ### 常见网页特效案例
+
+   1. 案例：轮播图
+
+   2. **节流阀：当上一个函数动画内容执行完毕，再执行下一个函数动画，让事件无法连续触发**
+
+      **实现核心：利用回调函数，添加一个变量控制，锁住函数和解锁函数**
+
+      eg.开始设置一个变量  var flag=true;
+
+      if(flag){flag=false;do next} 关闭水龙头
+
+      利用回调函数 动画执行完毕 flag=true 打开水龙头
+
+   3. 案例：返回顶部
+
+      滚动窗口至文档中特定位置：window.scroll(x,y)
+   
+      - 带有动画的返回顶部
+      - 1.使用封装的animate动画函数
+      - 2.只需把所有left值改成 **页面垂直滚动距离相关**就可以了
+      - 3.页面滚动了多少，可以通过window.pageYOffset获得
+      - 4.最后是页面滚动，使用window.scroll(x,y)
+   
+   4. 案例：筋斗云
+
+## 移动端网页特效
+
+1. 触屏事件（touch）
+
+   触摸事件可响应用户手指（或触控笔）对屏幕或触控板的操作
+
+   | 触摸touch事件 | 说明                          |
+   | ------------- | ----------------------------- |
+   | touchstart    | 手指触摸到一个dom元素时触发   |
+   | touchmove     | 手指在一个dom元素上滑动时触发 |
+   | touchend      | 手指从一个dom元素上移开时触发 |
+
+   
+
+2. 移动端常见特效
+
+3. 移动端常见开发插件
+
+4. 移动端常用开发框架
+
+
+
+
+
