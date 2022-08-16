@@ -826,7 +826,6 @@ window.addEventListener('resize', function() {})
           var fun = new Fun();
       </script>
   </body>
-  
   ```
 
 ### 4.JS执行机制
@@ -1316,23 +1315,161 @@ window对象给我们提供了一个history对象，**与浏览器历史记录�
 
 1. 触屏事件（touch）
 
-   触摸事件可响应用户手指（或触控笔）对屏幕或触控板的操作
+   1. 触摸事件可响应用户手指（或触控笔）对屏幕或触控板的操作
 
-   | 触摸touch事件 | 说明                          |
-   | ------------- | ----------------------------- |
-   | touchstart    | 手指触摸到一个dom元素时触发   |
-   | touchmove     | 手指在一个dom元素上滑动时触发 |
-   | touchend      | 手指从一个dom元素上移开时触发 |
+       | 触摸touch事件 | 说明                          |
+       | ------------- | ----------------------------- |
+       | touchstart    | 手指触摸到一个dom元素时触发   |
+       | touchmove     | 手指在一个dom元素上滑动时触发 |
+       | touchend      | 手指从一个dom元素上移开时触发 |
 
-   
+   2. 触摸事件对象（TouchEvent）
+
+       | 触摸列表       | 说明                                           |
+       | -------------- | ---------------------------------------------- |
+       | touches        | 正在触摸屏幕的所有手指的一个列表               |
+       | targetTouches  | 正在触摸当前DOM元素上的手指的一个列表          |
+       | changedTouches | 手指状态发生改变的列表，从无到有，从有到无变化 |
+
+   3. 移动端拖动元素
+
+   ​    （1） 触摸元素 touchstart：  获取手指初始坐标，同时获得盒子原来的位置
+
+   ​    （2） 移动手指 touchmove：  计算手指的滑动距离，并且移动盒子
+
+   ​    （3） 离开手指 touchend:
+
+   ​	**注：手指移动会触发滚动屏幕，由此需要阻止默认屏幕滚动（e.preventDefault()）**
 
 2. 移动端常见特效
 
+   ##### classList属性
+
+   作用：返回元素类名。该属性用于在元素中添加，移除，切换CSS类
+
+   ```html
+   <script>
+       	// classList 返回元素的类名
+           var div = document.querySelector('div');
+           // console.log(div.classList[1]);
+           // 1. 添加类名  是在后面追加类名不会覆盖以前的类名 注意前面不需要加.
+           div.classList.add('three');
+           // 2. 删除类名
+           div.classList.remove('one');
+           // 3. 切换类
+           var btn = document.querySelector('button');
+           btn.addEventListener('click', function() {
+               document.body.classList.toggle('bg');
+           }	
+   </script>
+   ```
+
+   **click延时解决方案**
+
+   移动端click事件有300ms的延时，原因移动端屏幕双击会缩放（double tap to zoom）页面
+
+   解决方案：
+
+   1. 禁用缩放。浏览器禁用默认的双击缩放行为且去掉300ms的点击延迟。
+
+      ```html
+      <meta name="viewport" content="user-scalable=no">
+      ```
+
+   2. 利用touch事件自己封装这个事件解决300ms延迟
+
+      原理
+
+      1. 当手指触摸屏幕，记录当前触摸时间
+      2. 当手指离开屏幕，用离开时间减去触摸时间
+      3. 当时间小于150ms并且没有滑动过屏幕，则定义为点击
+
+   3. 使用插件。fastclick插件解决300ms延迟
+
 3. 移动端常见开发插件
+
+   swiper
+
+   superslide
+
+   zy.media.js---视频插件
 
 4. 移动端常用开发框架
 
+   框架：一套架构，基于自身特点向用户提供一套较为完整的解决方案，其控制权在框架本身，使用者按框架所规定的某种规范进行开发
+
+   插件：一般为解决某个问题存在，功能单一，比较小
+
+   前端框架有：**BootStrap，Vue，Angular，React等**，PC移动端都可
+
+   前端常用移动端插件：**swiper，superslide，iscroll**
+
+## 本地存储
+
+### 本地存储特性
+
+1. 数据存储在用户浏览器中
+2. 设置、读取方便，甚至页面刷新不丢失数据
+3. 容量较大，sessionStorage约5M，localStorage约20M
+4. 只能存字符串，可将对象JSON.stringify()编码后存储
+
+### window.sessionStorage
+
+1. 生命周期为关闭浏览器窗口
+2. 在同一个窗口（页面）下数据可以共享
+3. 以键值对的形式存储使用
+
+#### 存储数据
+
+```html
+sessionStorage.setItem(key,value)
+```
+
+#### 获取数据
+
+```html
+sessionStorage.getItem(key)
+```
+
+#### 删除数据
+
+```html
+sessionStorage.removeItem(key)
+```
+
+#### 删除所有数据
+
+```html
+sessionStorage.clear()
+```
 
 
+### window.localStorage
 
+1. 生命周期永久生效，除非手动删除否则关闭页面也会存在
+2. 可多窗口（页面）共享（同一浏览器也可共享）
+3. 以键值对形式存储使用
 
+#### 存储数据
+
+```html
+localStorage.setItem(key,value)
+```
+
+#### 获取数据
+
+```html
+localStorage.getItem(key)
+```
+
+#### 删除数据
+
+```html
+localStorage.removeItem(key)
+```
+
+#### 删除所有数据
+
+```html
+localStorage.clear()
+```
